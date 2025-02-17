@@ -11,7 +11,7 @@ export default class Util {
     let responseString = "";
     try {
       // Split the body into sections to handle group optional comments
-      const sections = body.split(/\n\n+/);
+      const sections = body.split(/^##\s+/m);
       const pendingTasks: string[] = [];
 
       let isInOptionalSection = false;
@@ -22,13 +22,10 @@ export default class Util {
 
         lines.forEach((line, index) => {
           // Check for optional section comments
-          if (
-            line.trim().startsWith("<!--") &&
-            line.toLowerCase().includes("optional")
-          ) {
+          if (line.trim() === "<!--begin  optional tasks-->") {
             isInOptionalSection = true;
           }
-          if (line.includes("-->")) {
+          if (line.trim() === "<!--end optional tasks-->") {
             isInOptionalSection = false;
           }
 
