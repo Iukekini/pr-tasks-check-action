@@ -1,3 +1,5 @@
+import * as core from "@actions/core";
+
 export default class Util {
   /**
    * This method reads the input string and matches unchecked tasks ([ ]),
@@ -7,9 +9,11 @@ export default class Util {
    * @returns empty string if there are no pending required tasks,
    *          otherwise returns pending required tasks as a string
    */
+
   static getPendingTasks(body: string): string {
     let responseString = "";
     try {
+      core.debug(`PR Body: ${body}`);
       // Split the body into sections to handle group optional comments
       const sections = body.split(/^##\s+/m);
       const pendingTasks: string[] = [];
@@ -17,18 +21,18 @@ export default class Util {
       let isInOptionalSection = false;
 
       sections.forEach((section) => {
-        console.log(`Processing section: ${section}`);
+        core.debug(`Processing section: ${section}`);
         // Check for optional comment markers
         const lines = section.split("\n");
 
         lines.forEach((line, index) => {
           // Check for optional section comments
           if (line.trim() === "<!--begin optional tasks-->") {
-            console.log(`Entering optional section at line ${index + 1}`);
+            core.debug(`Entering optional section at line ${index + 1}`);
             isInOptionalSection = true;
           }
           if (line.trim() === "<!--end optional tasks-->") {
-            console.log(`Exiting optional section at line ${index + 1}`);
+            core.debug(`Exiting optional section at line ${index + 1}`);
             isInOptionalSection = false;
           }
 
@@ -37,7 +41,7 @@ export default class Util {
             // Skip if task is in optional section or marked individually as optional
             const isTaskOptional =
               isInOptionalSection || line.toLowerCase().includes("(optional)");
-            console.log(
+            core.debug(
               `Task found: ${line.trim()} (Optional: ${isTaskOptional})`
             );
             if (!isTaskOptional) {
