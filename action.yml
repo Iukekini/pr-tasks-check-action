@@ -4,6 +4,9 @@ inputs:
   repo-token:
     description: "The GITHUB_TOKEN secret"
     required: true
+branding:
+  icon: "activity"
+  color: "white"
 runs:
   using: "node12"
   main: "dist/index.js"
