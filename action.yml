@@ -1,5 +1,5 @@
 name: "PR Required Tasks Validator"
-description: "Validates that all required tasks in pull request checklists are completed, with support for marking tasks and sections as optional"
+description: "Validates that all required tasks in pull request checklists are completed, with support for optional tasks"
 inputs:
   repo-token:
     description: "The GITHUB_TOKEN secret"
