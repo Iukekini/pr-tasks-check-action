@@ -15,7 +15,7 @@ A GitHub action that validates required tasks in pull request descriptions, with
 Add the action to your repository's workflow:
 
 ```yaml
-- uses: iukekini/pr-tasks-validator-action@v1
+- uses: iukekini/pr-tasks-validator-action@v1.0.1
   with:
     repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
