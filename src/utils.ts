@@ -17,15 +17,18 @@ export default class Util {
       let isInOptionalSection = false;
 
       sections.forEach((section) => {
+        console.log(`Processing section: ${section}`);
         // Check for optional comment markers
         const lines = section.split("\n");
 
         lines.forEach((line, index) => {
           // Check for optional section comments
           if (line.trim() === "<!--begin optional tasks-->") {
+            console.log(`Entering optional section at line ${index + 1}`);
             isInOptionalSection = true;
           }
           if (line.trim() === "<!--end optional tasks-->") {
+            console.log(`Exiting optional section at line ${index + 1}`);
             isInOptionalSection = false;
           }
 
@@ -34,7 +37,9 @@ export default class Util {
             // Skip if task is in optional section or marked individually as optional
             const isTaskOptional =
               isInOptionalSection || line.toLowerCase().includes("(optional)");
-
+            console.log(
+              `Task found: ${line.trim()} (Optional: ${isTaskOptional})`
+            );
             if (!isTaskOptional) {
               pendingTasks.push(line);
             }
