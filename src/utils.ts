@@ -1,32 +1,60 @@
 export default class Util {
+  /**
+   * This method reads the input string and matches unchecked tasks ([ ]),
+   * identifying optional tasks through comments.
+   *
+   * @param body PR body that has tasks
+   * @returns empty string if there are no pending required tasks,
+   *          otherwise returns pending required tasks as a string
+   */
+  static getPendingTasks(body: string): string {
+    let responseString = "";
+    try {
+      // Split the body into sections to handle group optional comments
+      const sections = body.split(/\n\n+/);
+      const pendingTasks: string[] = [];
 
-    /**
-     * This method will read the input string and match it with uncheck mark([ ]).
-     * Gets the pending tasks
-     * 
-     * @param body PR body that has tasks
-     * 
-     * Returns 
-     *  empty string if there are no pending tasks
-     *  pending tasks string
-     */
-    static getPendingTasks(body: string): string {
+      let isInOptionalSection = false;
 
-        let responseString = "";
-        try {
+      sections.forEach((section) => {
+        // Check for optional comment markers
+        const lines = section.split("\n");
 
-            const uncompletedTasks = body.match(/(- \[[ ]\].+)/g);
-            if (undefined != uncompletedTasks) {
+        lines.forEach((line, index) => {
+          // Check for optional section comments
+          if (
+            line.trim().startsWith("<!--") &&
+            line.toLowerCase().includes("optional")
+          ) {
+            isInOptionalSection = true;
+          }
+          if (line.includes("-->")) {
+            isInOptionalSection = false;
+          }
 
-                responseString += 'Uncompleted Tasks\n';
-                uncompletedTasks.forEach(u => {
-                    responseString += `${u}\n`;
-                });
+          // Check for uncompleted task
+          if (line.match(/^- \[[ ]\].+/)) {
+            // Skip if task is in optional section or marked individually as optional
+            const isTaskOptional =
+              isInOptionalSection || line.toLowerCase().includes("(optional)");
+
+            if (!isTaskOptional) {
+              pendingTasks.push(line);
             }
-        } catch (e) {
-            responseString = "";
-        }
+          }
+        });
+      });
 
-        return responseString;
+      if (pendingTasks.length > 0) {
+        responseString = "Uncompleted Required Tasks\n";
+        pendingTasks.forEach((task) => {
+          responseString += `${task}\n`;
+        });
+      }
+    } catch (e) {
+      responseString = "";
     }
+
+    return responseString;
+  }
 }

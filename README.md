@@ -1,12 +1,34 @@
-# PR TaskList Completed Checker Action
-A GitHub action that checks if all tasks are completed in the pull requests.
+# PR TaskList Required Items Checker
+
+A GitHub action that validates required tasks in pull request descriptions, with support for optional items and sections.
+
+## Features
+
+- ✅ Validates required checklist items in PR descriptions
+- 🔄 Supports individual optional tasks with `(optional)` suffix
+- 📑 Enables optional sections using HTML comments
+- ❌ Fails PR check if required tasks are incomplete
+- 📝 Provides detailed list of pending required tasks
+
+## Installation
+
+Add the action to your repository's workflow:
+
+```yaml
+- uses: iukekini/pr-tasks-check-action@v1
+  with:
+    repo-token: "${{ secrets.GITHUB_TOKEN }}"
+```
 
 ## Usage
 
-### Create a workflow
-```yml
-name: 'PR TaskList Completed Checker'
-on: 
+### Workflow Configuration
+
+Create `.github/workflows/pr-tasks.yml`:
+
+```yaml
+name: "Check Required PR Tasks"
+on:
   pull_request:
     types: [edited, opened, synchronize, reopened]
 
@@ -14,36 +36,54 @@ jobs:
   task-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: venkatsarvesh/pr-tasks-completed-action@v1.0.0
+      - uses: iukekini/pr-tasks-check-action@v1
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
 
-### Check whether tasks are completed
-Add a pull request template to your repository (`.github/pull_request_template.md`).
+### Task List Syntax
 
-For example: 
+Add tasks to your PR description using any of these formats:
+
 ```markdown
-## Checklist
-- [ ] Completed code review
-- [ ] Ran unit tests
-- [ ] Completed e2e tests
+## Required Tasks
+
+- [ ] Code review completed
+- [ ] Unit tests passing
+- [ ] This task is optional (optional)
+
+<!-- optional -->
+
+## Nice to Have
+
+- [ ] Performance tests
+- [ ] Documentation updates
+<!-- -->
+
+## More Tasks
+
+- [ ] Integration tests passing
 ```
 
-Create a pull request that contained tasks list to your repository. This will start a workflow automatically to check whether tasks are completed.
+The action will:
 
-Every update on a pull request will start a new workflow automatically to check pending tasks.
+- Fail if required tasks are unchecked
+- Skip tasks marked with `(optional)`
+- Ignore all tasks between optional HTML comments
 
-All tasks completed:
+## Examples
+
+### Success Case
+
+When all required tasks are complete:
 ![All tasks completed](images/success.png)
 
-Some tasks are still pending:
+### Failure Case
 
-![Some tasks are still pending](images/failure.png)
+When required tasks are pending:
+![Some tasks are pending](images/failure.png)
 
-You can check a list of uncompleted tasks at the Actions page on clicking Details.
-![List of pending tasks](images/pending_tasks.png)
+### Task List Output
 
-
-## :memo: Licence
-MIT
+View pending tasks in the Actions tab:
+![List of pending tasks](
