@@ -1,4 +1,4 @@
-# PR TaskList Required Items Checker
+# PR TaskList Required Items Validator
 
 A GitHub action that validates required tasks in pull request descriptions, with support for optional items and sections.
 
@@ -15,7 +15,7 @@ A GitHub action that validates required tasks in pull request descriptions, with
 Add the action to your repository's workflow:
 
 ```yaml
-- uses: iukekini/pr-tasks-check-action@v1
+- uses: iukekini/pr-tasks-validator-action@v1
   with:
     repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
@@ -36,7 +36,7 @@ jobs:
   task-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: iukekini/pr-tasks-check-action@v1
+      - uses: iukekini/pr-tasks-validator-action@v1
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```

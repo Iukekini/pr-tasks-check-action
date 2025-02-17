@@ -1,5 +1,5 @@
 {
-  "name": "pr-tasks-completed-action",
+  "name": "pr-tasks-validator-action",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/venkatsarvesh/pr-tasks-completed-action.git"
+    "url": "git+https://github.com/Iukekini/pr-tasks-check-action.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/venkatsarvesh/pr-tasks-completed-action/issues"
+    "url": "https://github.com/Iukekini/pr-tasks-check-action/issues"
   },
-  "homepage": "https://github.com/venkatsarvesh/pr-tasks-completed-action#readme",
+  "homepage": "https://github.com/Iukekini/pr-tasks-check-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/github": "^4.0.0"
