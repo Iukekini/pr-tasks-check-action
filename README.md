@@ -36,7 +36,7 @@ jobs:
   task-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: iukekini/pr-tasks-validator-action@v1
+      - uses: iukekini/pr-tasks-validator-action@v1.0.1
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 ```
@@ -52,13 +52,15 @@ Add tasks to your PR description using any of these formats:
 - [ ] Unit tests passing
 - [ ] This task is optional (optional)
 
-<!-- optional -->
-
 ## Nice to Have
+
+<!-- begin of optional -->
 
 - [ ] Performance tests
 - [ ] Documentation updates
-<!-- -->
+<!-- end of optional -->
+
+- [ ] Non required Tasks (optional)
 
 ## More Tasks
 
