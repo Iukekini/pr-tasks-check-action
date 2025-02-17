@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Iukekini/pr-tasks-check-action.git"
+    "url": "git+https://github.com/Iukekini/pr-tasks-validator-action.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Iukekini/pr-tasks-check-action/issues"
+    "url": "https://github.com/Iukekini/pr-tasks-validator-action/issues"
   },
-  "homepage": "https://github.com/Iukekini/pr-tasks-check-action#readme",
+  "homepage": "https://github.com/Iukekini/pr-tasks-validator-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/github": "^4.0.0"
