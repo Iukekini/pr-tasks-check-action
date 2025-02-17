@@ -54,11 +54,11 @@ Add tasks to your PR description using any of these formats:
 
 ## Nice to Have
 
-<!-- begin of optional -->
+<!--begin optional tasks-->
 
 - [ ] Performance tests
-- [ ] Documentation updates
-<!-- end of optional -->
+- [ ] Documentation updates"
+<!--end optional tasks-->
 
 - [ ] Non required Tasks (optional)
 

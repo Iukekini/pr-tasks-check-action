@@ -22,7 +22,7 @@ export default class Util {
 
         lines.forEach((line, index) => {
           // Check for optional section comments
-          if (line.trim() === "<!--begin  optional tasks-->") {
+          if (line.trim() === "<!--begin optional tasks-->") {
             isInOptionalSection = true;
           }
           if (line.trim() === "<!--end optional tasks-->") {
